@@ -1,7 +1,7 @@
-/* Descrição da atividade: Dados os objetos indicados no próximo slide, faça uma
-nova lista (array) contendo todos os tipos de produtos (não quantidades), dica:
-use Object.keys e Array.includes. Mostrar array por console. Posteriormente,
-obtenha o total de produtos vendidos para todos os objetos (use Object.values) */
+// Dados os objetos indicados, faça uma nova lista (array) contendo todos os tipos de produtos (não quantidades),
+// Posteriormente, obtenha o total de produtos vendidos para todos os objetos (use Object.values)
+
+// DADOS
 
 const objetos = [
   {
@@ -20,23 +20,33 @@ const objetos = [
   },
 ];
 
-console.log(objetos);
+// SEM UTILIZAR REDUCE
 
-let tiposProdutos = [];
-let totalProdutos = {};
+const tiposProdutosSet = new Set(); // O objeto Set permite que você armazene valores únicos de qualquer tipo
+const totalProdutos = {};
 
-for (obj of objetos) {
-  for (item in obj) {
-    if (!tiposProdutos.includes(item)) {
-      tiposProdutos.push(item);
-    }
-    if (!totalProdutos[item]) {
-      totalProdutos[item] = obj[item];
-    } else {
-      totalProdutos[item] += obj[item];
-    }
-  }
-}
+objetos.forEach((obj) => {
+  Object.keys(obj).forEach((item) => {
+    tiposProdutosSet.add(item);
+    totalProdutos[item] = (totalProdutos[item] || 0) + obj[item];
+  });
+});
 
-console.log(tiposProdutos);
-console.log(totalProdutos);
+const tiposProdutos = Array.from(tiposProdutosSet); // O método Array.from() cria uma nova instância de um Array
+
+console.table(totalProdutos);
+
+// UTILIZANDO REDUCE
+
+// const totalProdutos = objetos.reduce((acumulador, obj) => {
+//   Object.entries(obj).forEach(([item, quantidade]) => {
+//     acumulador.tipos.add(item);
+//     acumulador.total[item] = (acumulador.total[item] || 0) + quantidade;
+//   });
+//   return acumulador;
+// }, { tipos: new Set(), total: {} });
+
+// const tiposProdutos = [...totalProdutos.tipos];
+
+// console.log('Tipos de Produtos:', tiposProdutos);
+// console.table(totalProdutos.total);
