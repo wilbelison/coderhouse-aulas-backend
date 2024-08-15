@@ -18,6 +18,7 @@
 //  Definir uma função assíncrona “cálculos” e realizar testes usando async/await e
 //  try/catch
 
-console.group("Calculadora positiva com promises")
+const titleStyle = "font-weight: bolder; font-size: 16px;";
+console.group("%cCalculadora positiva com promises", titleStyle);
 
 console.groupEnd();

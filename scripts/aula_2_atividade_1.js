@@ -4,7 +4,8 @@
 // Descrição da atividade: Dados os objetos indicados no próximo slide, faça uma nova lista (array) contendo todos os tipos de produtos (não quantidades), dica: use Object.keys e Array.includes. Mostrar array por console. Posteriormente, obtenha o total de produtos vendidos para todos os objetos (use Object.values)
 // Duração: 15 minutos
 
-console.group("Utilização ES6-ES9");
+const titleStyle = "font-weight: bolder; font-size: 16px;";
+console.group("%cUtilização ES6-ES9", titleStyle);
 
 const objetos = [
   {
@@ -23,25 +24,29 @@ const objetos = [
   },
 ];
 
-/* SOLUÇÃO SEM UTILIZAR REDUCE */
+/* sol */
 
 const tiposProdutosSet = new Set(); // O objeto Set permite que você armazene valores únicos de qualquer tipo
-const totalProdutos = {};
+const totalPorProduto = {};
+let totalDeProdutos = 0;
 
 objetos.forEach((obj) => {
   Object.keys(obj).forEach((item) => {
     tiposProdutosSet.add(item);
-    totalProdutos[item] = (totalProdutos[item] || 0) + obj[item];
+    totalPorProduto[item] = (totalPorProduto[item] || 0) + obj[item];
+    totalDeProdutos += obj[item];
   });
 });
 
+totalPorProduto["TOTAL DE PRODUTOS"] = totalDeProdutos;
+
 const tiposProdutos = Array.from(tiposProdutosSet); // O método Array.from() cria uma nova instância de um Array
 
-console.table(totalProdutos);
+console.table(totalPorProduto);
 
 /* SOLUÇÃO UTILIZANDO REDUCE */
 
-// const totalProdutos = objetos.reduce((acumulador, obj) => {
+// const totalPorProduto = objetos.reduce((acumulador, obj) => {
 //   Object.entries(obj).forEach(([item, quantidade]) => {
 //     acumulador.tipos.add(item);
 //     acumulador.total[item] = (acumulador.total[item] || 0) + quantidade;
@@ -49,9 +54,9 @@ console.table(totalProdutos);
 //   return acumulador;
 // }, { tipos: new Set(), total: {} });
 
-// const tiposProdutos = [...totalProdutos.tipos];
+// const tiposProdutos = [...totalPorProduto.tipos];
 
 // console.log('Tipos de Produtos:', tiposProdutos);
-// console.table(totalProdutos.total);
+// console.table(totalDeProdutos.total);
 
 console.groupEnd();

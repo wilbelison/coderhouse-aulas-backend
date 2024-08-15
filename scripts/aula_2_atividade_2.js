@@ -21,7 +21,8 @@
 // ● Nova data
 // O método deve copiar o evento existente, com um novo local, nova data, novo id e seus participantes vazios (Use o operador spread para o restante das propriedades)
 
-console.group("Registrador de Ingressos de Eventos");
+const titleStyle = "font-weight: bolder; font-size: 16px;";
+console.group("%cRegistrador de Ingressos de Eventos", titleStyle);
 
 class TicketManager {
   #basePrice = 0.15;
@@ -42,6 +43,7 @@ class TicketManager {
       participants: [],
     };
     this.events.push(novoEvento);
+    console.log(`Evento '${novoEvento.nome}' adicionado`);
   }
 
   getEvents() {
@@ -50,8 +52,14 @@ class TicketManager {
 }
 
 const manager = new TicketManager();
+
 manager.addEvent("Concerto de Rock", "Estádio", 100);
 manager.addEvent("Peça de Teatro", "Teatro Municipal", 50, 100);
+
 console.log(manager.getEvents());
+
+manager.events.forEach((event) => {
+  console.table(event);
+});
 
 console.groupEnd();

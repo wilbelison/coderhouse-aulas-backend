@@ -27,7 +27,8 @@
 
 // ✔ Arquivo Javascript pronto para ser executado a partir do node.
 
-console.group("ProductManager");
+const titleStyle = "font-weight: bolder; font-size: 16px;";
+console.group("%cProductManager", titleStyle);
 
 class ProductManager {
   constructor() {
@@ -50,7 +51,7 @@ class ProductManager {
           stock: stock,
         };
         this.products.push(novoProduto);
-        console.log("Produto adicionado");
+        console.log(`Produto "${novoProduto.title}" adicionado`);
       } else {
         console.error("Código já existe");
       }
@@ -82,8 +83,8 @@ catalog.addProduct("Maçã Verde", "Maçã Verde", 1.99, "./maca.jpg", "MC", 9);
 
 console.log(catalog.getProducts());
 
-console.log(catalog.getProductById(0));
-console.log(catalog.getProductById(1));
-console.log(catalog.getProductById(2));
+console.table(catalog.getProductById(0));
+console.table(catalog.getProductById(1));
+console.table(catalog.getProductById(2));
 
 console.groupEnd();

@@ -1,4 +1,5 @@
-console.group("Exemplo de Promisses (Async, Await, Then, Try e Catch)");
+const titleStyle = "font-weight: bolder; font-size: 16px;";
+console.group("%cExemplo de Promisses (Async, Await, Then, Try e Catch)", titleStyle);
 
 const dividir = (valor, divisor) => {
   if (typeof valor !== "number" || typeof divisor !== "number") {
@@ -18,24 +19,24 @@ const dividir = (valor, divisor) => {
 
 dividir(4, 0)
   .then((resultado) => {
-    console.log("Resultado é", resultado);
+    console.log("nested .then():", resultado);
   })
   .catch((error) => {
-    console.error(error);
+    console.error("nested .catch(error):", error);
   })
   .finally(() => {
-    console.log("finally");
+    console.log("nested .finally()");
   });
 
 dividir(4, 2)
   .then((resultado) => {
-    console.log("Resultado é", resultado);
+    console.log("nested .then():", resultado);
   })
   .catch((error) => {
-    console.log(error);
+    console.error("nested .catch(error):", error);
   })
   .finally(() => {
-    console.log("finally");
+    console.log("nested .finally()");
   });
 
 /*  async try{} catch(){} finally{} */
@@ -43,11 +44,11 @@ dividir(4, 2)
 async function assincrona(valor, divisor) {
   try {
     const resultado = await dividir(valor, divisor);
-    console.log(resultado);
+    console.log("async try{}:", resultado);
   } catch (error) {
-    console.error(error);
+    console.error("async catch(error){}:", error);
   } finally {
-    console.log("finally");
+    console.log("async finally{}");
   }
 }
 
