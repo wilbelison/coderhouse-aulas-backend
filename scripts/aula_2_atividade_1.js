@@ -1,26 +1,29 @@
-// Dados os objetos indicados, faça uma nova lista (array) contendo todos os tipos de produtos (não quantidades),
-// Posteriormente, obtenha o total de produtos vendidos para todos os objetos (use Object.values)
+// ATIVIDADE EM SALA
+// Para praticar
+// Utilização ES6-ES9
+// Descrição da atividade: Dados os objetos indicados no próximo slide, faça uma nova lista (array) contendo todos os tipos de produtos (não quantidades), dica: use Object.keys e Array.includes. Mostrar array por console. Posteriormente, obtenha o total de produtos vendidos para todos os objetos (use Object.values)
+// Duração: 15 minutos
 
-// DADOS
+console.group("Utilização ES6-ES9");
 
 const objetos = [
   {
-    macas: 3,
-    peras: 2,
-    carne: 1,
-    frango: 5,
-    doces: 2,
+    "🍎 maçãs": 3,
+    "🍐 peras": 2,
+    "🥩 carnes": 1,
+    "🍗 frangos": 5,
+    "🍭 doces": 2,
   },
   {
-    macas: 1,
-    cafes: 1,
-    ovos: 6,
-    frango: 1,
-    paes: 4,
+    "🍎 maçãs": 1,
+    "☕️ cafés": 1,
+    "🥚 ovos": 6,
+    "🍗 frangos": 1,
+    "🍞 pães": 4,
   },
 ];
 
-// SEM UTILIZAR REDUCE
+/* SOLUÇÃO SEM UTILIZAR REDUCE */
 
 const tiposProdutosSet = new Set(); // O objeto Set permite que você armazene valores únicos de qualquer tipo
 const totalProdutos = {};
@@ -36,7 +39,7 @@ const tiposProdutos = Array.from(tiposProdutosSet); // O método Array.from() cr
 
 console.table(totalProdutos);
 
-// UTILIZANDO REDUCE
+/* SOLUÇÃO UTILIZANDO REDUCE */
 
 // const totalProdutos = objetos.reduce((acumulador, obj) => {
 //   Object.entries(obj).forEach(([item, quantidade]) => {
@@ -50,3 +53,5 @@ console.table(totalProdutos);
 
 // console.log('Tipos de Produtos:', tiposProdutos);
 // console.table(totalProdutos.total);
+
+console.groupEnd();

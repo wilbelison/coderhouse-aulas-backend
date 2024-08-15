@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  line-height: 100%;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  padding: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  background-color: #282828;
+  color: #c7c7c7;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+select {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px 40px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  background-color: #3c3c3c;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 100px;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: bolder;
+}
