@@ -24,6 +24,12 @@ body {
 }
 
 select {
+  width: 100%;
+  max-width: 600px;
+}
+
+select,
+button {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: bold;
@@ -36,6 +42,11 @@ select {
   -webkit-appearance: none;
   appearance: none;
   border-radius: 100px;
+}
+
+p {
+  font-size: 12px;
+  line-height: 16px;
 }
 
 h1 {

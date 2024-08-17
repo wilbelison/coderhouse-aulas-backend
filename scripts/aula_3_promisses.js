@@ -56,3 +56,27 @@ assincrona(4, 0);
 assincrona(4, 2);
 
 console.groupEnd();
+
+
+
+// console.log("Início do Código");
+
+// setTimeout(() => {
+//   console.log("Cheguei atrasado");
+// }, 2000);
+
+// console.log("Fim do Código");
+
+// let contador = 0;
+
+// console.log("Início do Código");
+
+// const intervalo = setInterval(() => {
+//   contador++;
+//   console.log(contador);
+//   if(contador >= 10) {
+//     clearInterval(intervalo);
+//   }
+// }, 1000);
+
+// console.log("Fim do Código");
