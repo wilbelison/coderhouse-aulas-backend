@@ -23,15 +23,11 @@ body {
   gap: 40px;
 }
 
-select {
-  width: 100%;
-  max-width: 600px;
-}
-
 select,
 button {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
+  line-height: 24px;
   font-weight: bold;
   padding: 20px 40px;
   cursor: pointer;
@@ -44,12 +40,45 @@ button {
   border-radius: 100px;
 }
 
+select {
+  width: 100%;
+  height: 88px;
+  max-width: 600px;
+  text-overflow: ellipsis;
+  text-wrap: wrap;
+
+  padding: 20px 80px 20px 40px;
+
+  background-image: linear-gradient(45deg, transparent 50%, #fff600 50%),
+    linear-gradient(135deg, #fff600 50%, transparent 50%);
+  background-position: calc(100% - 40px) calc(1em + 20px),
+    calc(100% - 30px) calc(1em + 20px), 100% 0;
+  background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
 p {
   font-size: 12px;
   line-height: 16px;
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 120px;
   font-weight: bolder;
+  letter-spacing: -1rem;
+  line-height: 0.70;
+}
+
+.star-wars {
+  color: transparent;
+  -webkit-text-stroke: 0.3rem rgb(255, 246, 0);`
+  transform-origin: 50%;
+  transform: perspective(50rem) rotateX(50deg);
+  text-shadow: 0 0 10rem rgba(0,0,0,0.5);
+  &:before {
+    content: attr(data-content);
+    -webkit-text-fill-color: #282828;
+    -webkit-text-stroke: 0;
+    position: absolute;
+  }
 }

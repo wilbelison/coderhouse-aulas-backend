@@ -1,6 +1,6 @@
 // ATIVIDADE EM SALA
-// Para praticar
 // Utilização ES6-ES9
+
 // Descrição da atividade: Dados os objetos indicados no próximo slide, faça uma nova lista (array) contendo todos os tipos de produtos (não quantidades), dica: use Object.keys e Array.includes. Mostrar array por console. Posteriormente, obtenha o total de produtos vendidos para todos os objetos (use Object.values)
 // Duração: 15 minutos
 

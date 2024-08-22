@@ -1,37 +1,69 @@
 const fs = require("fs");
 
-/* fs sync */
+/* https://nodejs.org/api/fs.html#synchronous-example */
 
-const arquivo = "./saudacao.txt";
-const saudacao = fs.existsSync(arquivo);
-let conteudo = "";
-let linhas = 0;
+// const fsSynchronous = (path = "./aula_4_fs.txt", times = 3) => {
+//   try {
+//     const content = fs.readFileSync(path, "utf8");
+//     const line = content.split("\n").length;
 
-if (saudacao) {
-  conteudo = fs.readFileSync(arquivo, "utf-8");
-  linhas = conteudo.split("\n").length;
-  console.log(conteudo);
-  if (linhas < 10) {
-    fs.appendFileSync(arquivo, `\n${new Date().toLocaleString("pt-BR")}: Hello world!`);
-  } else {
-    fs.unlinkSync(arquivo);
-    console.log("\nArquivo excluído");
-  }
-} else {
-  fs.writeFileSync(arquivo, `\n${new Date().toLocaleString("pt-BR")}: Hello world!`);
-  console.log("Arquivo criado");
-  console.log(conteudo);
+//     if (line <= times) {
+//       fs.appendFileSync(
+//         path,
+//         `\n${new Date().toLocaleString("pt-BR")}: Hello world! (${line})`
+//       );
+//       console.log("File modified!");
+//     } else {
+//       fs.unlinkSync(path);
+//       console.log("File deleted!");
+//     }
+//   } catch (err) {
+//     try {
+//       fs.writeFileSync(
+//         path,
+//         `\n${new Date().toLocaleString("pt-BR")}: Hello world! (1)`
+//       );
+//       console.log("File created!");
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+// };
+
+// fsSynchronous();
+
+/* https://nodejs.org/api/fs.html#promise-example */
+
+// const fsPromises = async (path = "./aula_4_fs.txt", times = 3) => {
+//   try {
+//     const content = await fs.promises.readFile(path, "utf8");
+//     const line = content.split("\n").length;
+
+//     if (line <= times) {
+//       await fs.promises.appendFile(
+//         path,
+//         `\n${new Date().toLocaleString("pt-BR")}: Hello world! (${line})`
+//       );
+//       console.log("File modified!");
+//     } else {
+//       await fs.promises.unlink(path);
+//       console.log("File deleted!");
+//     }
+//   } catch (err) {
+//     try {
+//       await fs.promises.writeFile(
+//         path,
+//         `\n${new Date().toLocaleString("pt-BR")}: Hello world! (1)`
+//       );
+//       console.log("File created!");
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+// };
+
+/* https://nodejs.org/api/fs.html#callback-example */
+
+const fsCallback = (path = "./aula_4_fs.txt", times = 3) => {
+  
 }
-
-/* fs async (função de callback) */
-
-// const arquivo2 = "./saudacao2.txt";
-
-// fs.writeFile(arquivo2, `${new Date().toLocaleString("pt-BR")}: Hello world!`, (error) => {
-//   if (error) throw new Error("Erro na criação do arquivo");
-
-//   fs.readFile(arquivo2, "utf-8", (error, conteudo) => {
-//     if (error) throw new Error("Erro na leitura do arquivo");
-//     console.log(conteudo);
-//   });
-// });

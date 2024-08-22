@@ -1,7 +1,8 @@
 // ATIVIDADE EM SALA
 // Registrador de Ingressos de Eventos
-// Como fazemos? Será criada uma classe que permitirá um gerenciamento
-// completo dos usuários que desejam acessar esses eventos.
+
+// Como fazemos? Será criada uma classe que permitirá um gerenciamento completo dos usuários que desejam acessar esses eventos.
+
 // ✓ Defina a classe TicketManager, que terá um array de eventos que começará vazio. A classe deve ter uma variável privada "basePrice", que adicionará um custo adicional ao preço de cada evento.
 // ✓ Deve possuir o método "getEvents" que mostrará os eventos salvos.
 // ✓ Deve possuir o método "addEvent", que receberá os seguintes parâmetros:

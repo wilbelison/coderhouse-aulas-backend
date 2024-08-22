@@ -4,7 +4,9 @@
 // Objetivo
 
 // ✓ Crie uma classe “ProductManager que gerencia um conjunto de produtos”
-// Aspectos a incluir
+
+// Aspectos a incluir:
+
 // ✓ Deve ser criado a partir de seu construtor com o elemento products, que será um array vazio.
 
 // Cada produto que você gerencia deve ter as seguintes propriedades:
@@ -14,8 +16,6 @@
 // ✓ thumbnail (caminho da imagem)
 // ✓ code (código identificador)
 // ✓ stock (número de peças disponíveis)
-
-// Aspectos a incluir
 
 // ✓ Deve ter um método “addProduct” que adicionará um produto ao array inicial de produtos.
 // ✓ Valide que o campo "código" não se repete e que todos os campos são obrigatórios
