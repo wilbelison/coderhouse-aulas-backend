@@ -1,1 +1,11 @@
-[{"id":0,"title":"test"}]
+[
+  {
+    "id": 0,
+    "title": "Produto 0",
+    "description": "Descrição do produto 0",
+    "price": 9.99,
+    "thumbnail": "./products/0/thumbnail.jpg",
+    "code": "PROD0",
+    "stock": 9
+  }
+]

@@ -43,72 +43,109 @@ console.group("%cProductManager", titleStyle);
 class ProductManager {
   constructor(jsonPath) {
     this.jsonPath = jsonPath;
-    this.products = [];
-    this.id = 0;
+    this.products = this.loadProducts() || [];
+    this.id = this.products.length
+      ? this.products[this.products.length - 1].id + 1
+      : 1;
   }
 
-  async saveJson(content) {
-    fs.appendFile(this.jsonPath, JSON.stringify(content), (err, result) => {
-      try {
-        console.log(result);
-      } catch (err) {
-        fs.writeFile(this.jsonPath, JSON.stringify(content));
-      }
-    });
-  }
-
-  async loadJson() {
+  loadProducts() {
     try {
-      return JSON.parse(await fs.promises.readFile(this.jsonPath));
-    } catch (err) {
-      return false;
+      return JSON.parse(fs.readFileSync(this.jsonPath, "utf-8"));
+    } catch {
+      return [];
     }
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
-    if (title && description && price && thumbnail && code && stock) {
-      const findCode = code;
-      const hasCode = this.products.find(({ code }) => code === findCode);
-      if (!hasCode) {
-        const novoProduto = {
-          id: this.id++,
-          title: title,
-          description: description,
-          price: price,
-          thumbnail: thumbnail,
-          code: code,
-          stock: stock,
-        };
-        this.products.push(novoProduto);
-        console.log(`Produto "${novoProduto.title}" adicionado`);
-      } else {
-        console.error("Código já existe");
-      }
-    } else {
-      console.error("Todos os argumentos da classe são obrigatórios");
-    }
+  saveProducts() {
+    fs.writeFileSync(this.jsonPath, JSON.stringify(this.products, null, 2));
   }
 
-  async getProducts() {
+  addProduct(product) {
+    const { title, description, price, thumbnail, code, stock } = product;
+    if (!title || !description || !price || !thumbnail || !code || !stock) {
+      return console.error("Todos os campos são obrigatórios.");
+    }
+    if (this.products.some((p) => p.code === code)) {
+      return console.error("Erro: Código do produto já existe.");
+    }
+    this.products.push({
+      id: this.id++,
+      title,
+      description,
+      price,
+      thumbnail,
+      code,
+      stock,
+    });
+    this.saveProducts();
+    console.log(`Produto "${title}" adicionado com sucesso.`);
+  }
+
+  getProducts() {
     return this.products;
   }
 
-  async getProductById(findId) {
-    const product = this.products.find(({ id }) => id === findId);
+  getProductById(id) {
+    return (
+      this.products.find((product) => product.id === id) ||
+      console.error("Erro: Produto não encontrado.")
+    );
+  }
+
+  updateProduct(id, updatedFields) {
+    const product = this.getProductById(id);
     if (product) {
-      return product;
+      Object.assign(product, updatedFields);
+      this.saveProducts();
+      console.log(`Produto "${product.title}" atualizado com sucesso.`);
+    }
+  }
+
+  deleteProduct(id) {
+    const initialLength = this.products.length;
+    this.products = this.products.filter((product) => product.id !== id);
+    if (this.products.length < initialLength) {
+      this.saveProducts();
+      console.log(`Produto deletado com sucesso.`);
     } else {
-      console.error("Não encontrado");
+      console.error("Erro: Produto não encontrado para exclusão.");
     }
   }
 }
 
-const init = () => {
-  const catalog = new ProductManager("./aula_4_desafio.json");
-  const content = [{ id: 0, title: "test" }];
-  catalog.saveJson(content);
-};
+const catalog = new ProductManager("./aula_4_desafio.json");
 
-init();
+console.log("Adicionando um produto:");
+catalog.addProduct({
+  title: "Produto 1",
+  description: "Descrição do produto 1",
+  price: 9.99,
+  thumbnail: "./products/1/thumbnail.jpg",
+  code: "PROD1",
+  stock: 9,
+});
+
+console.log("Listando todos os produtos:");
+console.table(catalog.getProducts());
+
+console.log("Tentando adicionar produto com código existente:");
+catalog.addProduct({
+  title: "Produto 2",
+  description: "Descrição do produto 2",
+  price: 9.99,
+  thumbnail: "./products/2/thumbnail.jpg",
+  code: "PROD1",
+  stock: 9,
+});
+
+console.log("Atualizando produto com ID 1:");
+catalog.updateProduct(1, { price: 10 });
+
+console.log("Puxando produto com ID 1:");
+console.table(catalog.getProductById(1));
+
+console.log("Deletando produto com ID 1:");
+catalog.deleteProduct(1);
 
 console.groupEnd();
