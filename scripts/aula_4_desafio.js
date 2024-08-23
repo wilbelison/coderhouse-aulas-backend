@@ -132,36 +132,6 @@ class ProductManager {
 const catalog = new ProductManager("./aula_4_desafio.json");
 
 catalog.addProduct({
-  title: "Biscoitos da Sorte do Futuro",
-  description:
-    "Descubra o que o amanhã reserva... em forma de biscoito! Cada pacote contém 10 previsões inusitadas.",
-  price: 14.99,
-  thumbnail: "./products/fortune_cookies.jpg",
-  code: "FORTUNE2024",
-  stock: 42,
-});
-
-catalog.addProduct({
-  title: "Café Energético Turbo 9000",
-  description:
-    "Para aqueles que precisam enfrentar o dia como se estivessem em uma corrida de Fórmula 1. 500ml de pura energia!",
-  price: 24.99,
-  thumbnail: "./products/turbo_coffee.jpg",
-  code: "COFFEE9000",
-  stock: 25,
-});
-
-catalog.addProduct({
-  title: "Pizza de Marte",
-  description:
-    "Direto do Planeta Vermelho, essa pizza é feita com os melhores ingredientes de baixa gravidade. Um sabor fora deste mundo!",
-  price: 49.99,
-  thumbnail: "./products/mars_pizza.jpg",
-  code: "PIZZA_MARS",
-  stock: 15,
-});
-
-catalog.addProduct({
   title: "Refrigerante Alienígena",
   description:
     "Um refresco importado diretamente da Galáxia de Andrômeda. Sabor extraterrestre com bolhas que flutuam!",
@@ -173,11 +143,9 @@ catalog.addProduct({
 
 console.table(catalog.getProducts());
 
-catalog.updateProduct(4, { price: 16.99 });
+catalog.updateProduct(3, { price: 16.99 });
 console.table(catalog.getProductById(4));
 
-catalog.deleteProduct(4);
-
-console.groupEnd();
+catalog.deleteProduct(3);
 
 console.groupEnd();

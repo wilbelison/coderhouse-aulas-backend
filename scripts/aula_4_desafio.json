@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 0,
     "title": "Biscoitos da Sorte do Futuro",
     "description": "Descubra o que o amanhã reserva... em forma de biscoito! Cada pacote contém 10 previsões inusitadas.",
     "price": 14.99,
@@ -9,7 +9,7 @@
     "stock": 42
   },
   {
-    "id": 2,
+    "id": 1,
     "title": "Café Energético Turbo 9000",
     "description": "Para aqueles que precisam enfrentar o dia como se estivessem em uma corrida de Fórmula 1. 500ml de pura energia!",
     "price": 24.99,
@@ -18,7 +18,7 @@
     "stock": 25
   },
   {
-    "id": 3,
+    "id": 2,
     "title": "Pizza de Marte",
     "description": "Direto do Planeta Vermelho, essa pizza é feita com os melhores ingredientes de baixa gravidade. Um sabor fora deste mundo!",
     "price": 49.99,
