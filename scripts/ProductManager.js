@@ -35,14 +35,15 @@
 
 // ✔ Arquivo Javascript chamado ProductManager.js
 
+const fs = require("fs");
+
 const titleStyle = "font-weight: bolder; font-size: 16px;";
 console.group("%cProductManager", titleStyle);
 
-const fs = require("fs");
 class ProductManager {
   constructor(jsonPath) {
     this.jsonPath = jsonPath;
-    this.products = this.loadProducts();
+    this.products = this.loadProducts() || [];
     this.id = this.products.length
       ? this.products[this.products.length - 1].id + 1
       : 1;
@@ -63,16 +64,10 @@ class ProductManager {
   addProduct(product) {
     const { title, description, price, thumbnail, code, stock } = product;
     if (!title || !description || !price || !thumbnail || !code || !stock) {
-      console.error(
-        "Oops! Você esqueceu algum ingrediente essencial do produto."
-      );
-      return;
+      return console.error("Todos os campos são obrigatórios.");
     }
     if (this.products.some((p) => p.code === code)) {
-      console.error(
-        "Erro 404: Código de produto duplicado! Tente outra combinação secreta."
-      );
-      return;
+      return console.error("Erro: Código do produto já existe.");
     }
     this.products.push({
       id: this.id++,
@@ -84,9 +79,7 @@ class ProductManager {
       stock,
     });
     this.saveProducts();
-    console.log(
-      `🎉 Uhul! Produto "${title}" adicionado com sucesso! Que tal adicionar outro?`
-    );
+    console.log(`Produto "${title}" adicionado com sucesso.`);
   }
 
   getProducts() {
@@ -94,12 +87,10 @@ class ProductManager {
   }
 
   getProductById(id) {
-    const product = this.products.find((product) => product.id === id);
-    if (!product)
-      console.error(
-        "A busca pelo produto falhou! Ele deve estar escondido em algum lugar."
-      );
-    return product;
+    return (
+      this.products.find((product) => product.id === id) ||
+      console.error("Erro: Produto não encontrado.")
+    );
   }
 
   updateProduct(id, updatedFields) {
@@ -107,77 +98,54 @@ class ProductManager {
     if (product) {
       Object.assign(product, updatedFields);
       this.saveProducts();
-      console.log(
-        `✨ O produto "${product.title}" passou por uma reforma e está atualizado!`
-      );
+      console.log(`Produto "${product.title}" atualizado com sucesso.`);
     }
   }
 
   deleteProduct(id) {
-    const index = this.products.findIndex((product) => product.id === id);
-    if (index !== -1) {
-      this.products.splice(index, 1);
+    const initialLength = this.products.length;
+    this.products = this.products.filter((product) => product.id !== id);
+    if (this.products.length < initialLength) {
       this.saveProducts();
-      console.log(
-        "🚮 Produto deletado com sucesso. Adeus, amigo... Foi bom enquanto durou!"
-      );
+      console.log(`Produto deletado com sucesso.`);
     } else {
-      console.error(
-        "Erro 404: Produto não encontrado. Será que ele foi abduzido?"
-      );
+      console.error("Erro: Produto não encontrado para exclusão.");
     }
   }
 }
 
-const catalog = new ProductManager("./aula_4_desafio.json");
+const catalog = new ProductManager("./ProductManager.json");
 
+console.log("Adicionando um produto:");
 catalog.addProduct({
-  title: "Biscoitos da Sorte do Futuro",
-  description:
-    "Descubra o que o amanhã reserva... em forma de biscoito! Cada pacote contém 10 previsões inusitadas.",
-  price: 14.99,
-  thumbnail: "./products/fortune_cookies.jpg",
-  code: "FORTUNE2024",
-  stock: 42,
+  title: "Produto 1",
+  description: "Descrição do produto 1",
+  price: 9.99,
+  thumbnail: "./products/1/thumbnail.jpg",
+  code: "PROD1",
+  stock: 9,
 });
 
-catalog.addProduct({
-  title: "Café Energético Turbo 9000",
-  description:
-    "Para aqueles que precisam enfrentar o dia como se estivessem em uma corrida de Fórmula 1. 500ml de pura energia!",
-  price: 24.99,
-  thumbnail: "./products/turbo_coffee.jpg",
-  code: "COFFEE9000",
-  stock: 25,
-});
-
-catalog.addProduct({
-  title: "Pizza de Marte",
-  description:
-    "Direto do Planeta Vermelho, essa pizza é feita com os melhores ingredientes de baixa gravidade. Um sabor fora deste mundo!",
-  price: 49.99,
-  thumbnail: "./products/mars_pizza.jpg",
-  code: "PIZZA_MARS",
-  stock: 15,
-});
-
-catalog.addProduct({
-  title: "Refrigerante Alienígena",
-  description:
-    "Um refresco importado diretamente da Galáxia de Andrômeda. Sabor extraterrestre com bolhas que flutuam!",
-  price: 19.99,
-  thumbnail: "./products/alien_soda.jpg",
-  code: "ALIEN_SODA",
-  stock: 33,
-});
-
+console.log("Listando todos os produtos:");
 console.table(catalog.getProducts());
 
-catalog.updateProduct(4, { price: 16.99 });
-console.table(catalog.getProductById(4));
+console.log("Tentando adicionar produto com código existente:");
+catalog.addProduct({
+  title: "Produto 2",
+  description: "Descrição do produto 2",
+  price: 9.99,
+  thumbnail: "./products/2/thumbnail.jpg",
+  code: "PROD1",
+  stock: 9,
+});
 
-catalog.deleteProduct(4);
+console.log("Atualizando produto com ID 1:");
+catalog.updateProduct(1, { price: 10 });
 
-console.groupEnd();
+console.log("Puxando produto com ID 1:");
+console.table(catalog.getProductById(1));
+
+console.log("Deletando produto com ID 1:");
+catalog.deleteProduct(1);
 
 console.groupEnd();
