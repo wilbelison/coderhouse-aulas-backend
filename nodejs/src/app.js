@@ -1,16 +1,20 @@
 const express = require("express");
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", function (req, res) {
-  res.send("Hello World!");
+  const { name } = req.query;
+  res.send(`Hello, ${name}!`);
 });
 
-app.get("/html", function (req, res) {
-  res.send("<h1>Html</h1>");
+app.get("/html/:name", function (req, res) {
+  const name = req.query.find("name");
+  console.log(req.params);
+  res.send(`<h1>Hello, ${name}!</h1>`);
 });
 
 app.get("/json", function (req, res) {
-  res.send({ id: 0, name: "wil"});
+  res.send({ id: 0, name: "wil" });
 });
 app.listen(8080, () => {
   console.log("Server running on port 8080", "http://localhost:8080");
