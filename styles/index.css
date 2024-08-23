@@ -28,17 +28,29 @@ button {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
   line-height: 24px;
-  font-weight: bold;
+  font-weight: bolder;
   padding: 20px 40px;
   cursor: pointer;
   border: none;
-  color: #fff;
-  background-color: #3c3c3c;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   border-radius: 100px;
 }
+
+button {
+  background-color: #fff600;
+  color: #282828;
+  &:hover {
+    background-color: hsl(58, 100%, 70%);
+  }
+  .icon {
+    font-size: 28px;
+    line-height: 0;
+  }
+}
+
+
 
 select {
   width: 100%;
@@ -46,6 +58,13 @@ select {
   max-width: 600px;
   text-overflow: ellipsis;
   text-wrap: wrap;
+
+  color: #fff;
+  background-color: #3c3c3c;
+
+  &:hover {
+    background-color: #575757;
+  }
 
   padding: 20px 80px 20px 40px;
 
@@ -71,7 +90,7 @@ h1 {
 
 .star-wars {
   color: transparent;
-  -webkit-text-stroke: 0.3rem rgb(255, 246, 0);`
+  -webkit-text-stroke: 0.3rem #fff600;`
   transform-origin: 50%;
   transform: perspective(50rem) rotateX(50deg);
   text-shadow: 0 0 10rem rgba(0,0,0,0.5);

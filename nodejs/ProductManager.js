@@ -36,19 +36,36 @@
 // ✔ Arquivo Javascript chamado ProductManager.js
 
 const fs = require("fs");
-const defaultFile = "./ProductManager.json";
 
 const titleStyle = "font-weight: bolder; font-size: 16px;";
 console.group("%cProductManager", titleStyle);
 
 class ProductManager {
-  constructor(path) {
-    this.path = file ?? "./ProductManager.json";
+  constructor(jsonPath) {
+    this.jsonPath = jsonPath || "./ProductManager.json";
     this.products = [];
     this.id = 0;
   }
 
-  addProduct(title, description, price, thumbnail, code, stock) {
+  async saveJson(content = "") {
+    fs.readFile(this.jsonPath, (content) => {
+      try {
+        console.log(file);
+      } catch (err) {
+        fs.promises.writeFile(this.jsonPath, JSON.stringify(content));
+      }
+    });
+  }
+
+  async loadJson(path) {
+    try {
+      return JSON.parse(await fs.promises.readFile(this.jsonPath));
+    } catch (err) {
+      return false;
+    }
+  }
+
+  async addProduct(title, description, price, thumbnail, code, stock) {
     if (title && description && price && thumbnail && code && stock) {
       const findCode = code;
       const hasCode = this.products.find(({ code }) => code === findCode);
@@ -72,11 +89,11 @@ class ProductManager {
     }
   }
 
-  getProducts() {
+  async getProducts() {
     return this.products;
   }
 
-  getProductById(findId) {
+  async getProductById(findId) {
     const product = this.products.find(({ id }) => id === findId);
     if (product) {
       return product;
@@ -86,17 +103,15 @@ class ProductManager {
   }
 }
 
-const catalog = new ProductManager();
+const init = async () => {
+  const catalog = new ProductManager("catalog.json");
 
-catalog.addProduct("Banana");
-catalog.addProduct("Banana", "Banana", 1.99, "./banana.jpg", "BN", 9);
-catalog.addProduct("Maçã", "Maçã", 1.99, "./maca.jpg", "MC", 9);
-catalog.addProduct("Maçã Verde", "Maçã Verde", 1.99, "./maca.jpg", "MC", 9);
+  const content = [{ id: 0, title: "test" }];
 
-console.log(catalog.getProducts());
+  await catalog.saveJson(content);
+  console.log(await catalog.loadJson());
+};
 
-console.table(catalog.getProductById(0));
-console.table(catalog.getProductById(1));
-console.table(catalog.getProductById(2));
+init();
 
 console.groupEnd();
