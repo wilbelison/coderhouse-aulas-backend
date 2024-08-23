@@ -42,22 +42,22 @@ console.group("%cProductManager", titleStyle);
 
 class ProductManager {
   constructor(jsonPath) {
-    this.jsonPath = jsonPath || "./ProductManager.json";
+    this.jsonPath = jsonPath;
     this.products = [];
     this.id = 0;
   }
 
-  async saveJson(content = "") {
-    fs.readFile(this.jsonPath, (content) => {
+  async saveJson(content) {
+    fs.appendFile(this.jsonPath, JSON.stringify(content), (err, result) => {
       try {
-        console.log(file);
+        console.log(result);
       } catch (err) {
-        fs.promises.writeFile(this.jsonPath, JSON.stringify(content));
+        fs.writeFile(this.jsonPath, JSON.stringify(content));
       }
     });
   }
 
-  async loadJson(path) {
+  async loadJson() {
     try {
       return JSON.parse(await fs.promises.readFile(this.jsonPath));
     } catch (err) {
@@ -103,13 +103,10 @@ class ProductManager {
   }
 }
 
-const init = async () => {
-  const catalog = new ProductManager("catalog.json");
-
+const init = () => {
+  const catalog = new ProductManager("./aula_4_desafio.json");
   const content = [{ id: 0, title: "test" }];
-
-  await catalog.saveJson(content);
-  console.log(await catalog.loadJson());
+  catalog.saveJson(content);
 };
 
 init();

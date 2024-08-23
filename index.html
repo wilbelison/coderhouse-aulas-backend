@@ -31,18 +31,34 @@
     <!-- <h2>Wilbelison Junior</h2> -->
     <select id="codeSelector" name="code">
       <option value="" selected>Selecione o código a ser executado...</option>
-      <option value="./scripts/aula_2_atividade_1.js">
-        Aula 2 - Atividade em sala 1 (Utilização ES6-ES9)
-      </option>
-      <option value="./scripts/aula_2_atividade_2.js">
-        Aula 2 - Atividade em sala 2 (Registrador de Ingressos de Eventos)
-      </option>
-      <option value="./scripts/aula_2_desafio.js">
-        Aula 2 - Desafio (ProductManager)
-      </option>
-      <option value="./scripts/aula_3_promises.js">
-        Aula 3 - Exemplo de Promises (Async, Await, Then, Finally, Try e Catch)
-      </option>
+      <optgroup label="Funcionam no Console do Browser">
+        <option value="./scripts/aula_2_atividade_1.js">
+          Aula 2 - Atividade em sala 1 (Utilização ES6-ES9)
+        </option>
+        <option value="./scripts/aula_2_atividade_2.js">
+          Aula 2 - Atividade em sala 2 (Registrador de Ingressos de Eventos)
+        </option>
+        <option value="./scripts/aula_2_desafio.js">
+          Aula 2 - Desafio (ProductManager)
+        </option>
+        <option value="./scripts/aula_3_promises.js">
+          Aula 3 - Exemplo de Promises (Async, Await, Then, Finally, Try e Catch)
+        </option>
+      </optgroup>
+      <optgroup label="Funcionam com Node.js">
+        <option value="./scripts/aula_4_fs.js">
+          Aula 4 - Atividade em sala (FileSystem Synchronous e Asynchronous)
+        </option>
+        <option value="./scripts/aula_4_desafio.js">
+          Aula 4 - Desafio (Gestão de arquivos em Javascript)
+        </option>
+        <option value="./scripts/aula_6_server.js">
+          Aula 6 - Atividade em sala 1 (Criando um Servidor com Node.js)
+        </option>
+        <option value="./scripts/aula_6_express.js">
+          Aula 6 - Atividade em sala 2 (Criando um Servidor com Express.js)
+        </option>
+      </optgroup>
     </select>
     <p>Para ver o resultado do código abra o console do navegador.</p>
     <button onclick="window.location.reload()"><span class="icon">⟳</span> Reload</button>
